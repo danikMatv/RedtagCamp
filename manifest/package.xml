@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>Lead.Help</members>
+		<members>Lead.Skill</members>
+		<name>BusinessProcess</name>
+	</types>
+	<types>
+		<members>Lead_Management</members>
+		<name>CustomApplication</name>
+	</types>
+    <types>
+    <members>LeadStatus</members>
+        <name>StandardValueSet</name>
+    </types>
+	<types>
+		<members>Lead.CurrentGenerators__c</members>
+		<members>Lead.Does_Skills_Meets_Program__c</members>
+		<members>Lead.Help_Description__c</members>
+		<members>Lead.NumberofLocations__c</members>
+		<members>Lead.Outreaches_count__c</members>
+		<members>Lead.Percentage_of_successful_Outreaches__c</members>
+		<members>Lead.Primary__c</members>
+		<members>Lead.ProductInterest__c</members>
+		<members>Lead.SICCode__c</members>
+		<members>Lead.Skills_Description__c</members>
+		<members>Lead.Successful_Outreaches__c</members>
+		<members>Outreach__c.Communication_Method__c</members>
+		<members>Outreach__c.Date_of_Outreach__c</members>
+		<members>Outreach__c.Duration__c</members>
+		<members>Outreach__c.Lead__c</members>
+		<members>Outreach__c.Outcome__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>Lead</members>
+		<members>Outreach__c</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>Help_Program_Lead</members>
+		<members>Lead_Management_UtilityBar</members>
+		<members>Lead_Record_Page</members>
+		<members>Lead_Record_Page1</members>
+		<members>Outreach_Layout</members>
+		<members>Skill_Program_Lead</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Lead-Lead %28Marketing%29 Layout</members>
+		<members>Lead-Lead %28Sales%29 Layout</members>
+		<members>Lead-Lead %28Support%29 Layout</members>
+		<members>Lead-Lead Help Program</members>
+		<members>Lead-Lead Layout</members>
+		<members>Lead-Lead Skill Program</members>
+		<members>Outreach__c-Outreach Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>Lead_Management_Manager_Access</members>
+		<members>Lead_Management_Staff_Access</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>ProgPlan Standard User</members>
+		<name>Profile</name>
+	</types>
+	<version>60.0</version>
+</Package>

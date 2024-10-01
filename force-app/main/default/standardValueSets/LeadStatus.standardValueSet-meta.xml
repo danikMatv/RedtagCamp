@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Open - Not Contacted</fullName>
+        <default>true</default>
+        <label>Open - Not Contacted</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Working - Contacted</fullName>
+        <default>false</default>
+        <label>Working - Contacted</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed - Converted</fullName>
+        <default>false</default>
+        <label>Closed - Converted</label>
+        <converted>true</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed - Not Converted</fullName>
+        <default>false</default>
+        <label>Closed - Not Converted</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>New</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>New</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Contacted</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>Contacted</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Needs Assessment</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>Needs Assessment</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Pending Decision</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>Pending Decision</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>In Review</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>In Review</label>
+        <converted>false</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Won</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>Closed Won</label>
+        <converted>true</converted>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Failed</fullName>
+        <color>#FFFF66</color>
+        <default>false</default>
+        <label>Closed Failed</label>
+        <converted>false</converted>
+    </standardValue>
+</StandardValueSet>
