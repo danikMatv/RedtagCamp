@@ -7,6 +7,6 @@
     <label>Percentage of successful Outreaches</label>
     <precision>18</precision>
     <required>false</required>
-    <scale>3</scale>
+    <scale>0</scale>
     <type>Percent</type>
 </CustomField>

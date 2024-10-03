@@ -9,10 +9,6 @@
 		<members>Lead_Management</members>
 		<name>CustomApplication</name>
 	</types>
-    <types>
-    <members>LeadStatus</members>
-        <name>StandardValueSet</name>
-    </types>
 	<types>
 		<members>Lead.CurrentGenerators__c</members>
 		<members>Lead.Does_Skills_Meets_Program__c</members>
@@ -47,6 +43,16 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>Notificate_User_about_Lead_new_Status</members>
+		<members>Outreaches_count</members>
+		<members>Update_Lead_Count</members>
+		<name>FlowDefinition</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>Group</name>
+	</types>
+	<types>
 		<members>Lead-Lead %28Marketing%29 Layout</members>
 		<members>Lead-Lead %28Sales%29 Layout</members>
 		<members>Lead-Lead %28Support%29 Layout</members>
@@ -64,6 +70,26 @@
 	<types>
 		<members>ProgPlan Standard User</members>
 		<name>Profile</name>
+	</types>
+	<types>
+		<members>Lead.New_Outreach</members>
+		<name>QuickAction</name>
+	</types>
+	<types>
+		<members>Lead</members>
+		<members>Outreach__c</members>
+		<name>SharingRules</name>
+	</types>
+	<types>
+		<members>LeadStatus</members>
+		<name>StandardValueSet</name>
+	</types>
+	<types>
+		<members>Lead.Number_should_be_valid</members>
+		<members>Lead.valid_email</members>
+		<members>Outreach__c.date_can_not_be_in_the_past</members>
+		<members>Outreach__c.duration_can_not_be_negative</members>
+		<name>ValidationRule</name>
 	</types>
 	<version>60.0</version>
 </Package>

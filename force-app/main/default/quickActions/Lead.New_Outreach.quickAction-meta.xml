@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Create new an Outreach record</description>
+    <fieldOverrides>
+        <field>Communication_Method__c</field>
+        <literalValue>Phone</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Date_of_Outreach__c</field>
+        <formula>Now()</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Duration__c</field>
+        <formula>5</formula>
+    </fieldOverrides>
+    <label>New Outreach</label>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Communication_Method__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns/>
+    </quickActionLayout>
+    <targetObject>Outreach__c</targetObject>
+    <targetParentField>Lead__c</targetParentField>
+    <type>Create</type>
+</QuickAction>
