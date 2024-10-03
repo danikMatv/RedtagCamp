@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>allow_editing_fro_member_in_group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>allow editing fro member in group</label>
+        <sharedTo>
+            <group>Lead_Management_Team</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Lead_Management_Team</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

@@ -196,6 +196,18 @@
         <field>Outreach__c.Outcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Notificate_User_about_Lead_new_Status</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Outreaches_count</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Lead_Count</flow>
+    </flowAccesses>
     <layoutAssignments>
         <layout>Lead-Lead Help Program</layout>
         <recordType>Lead.Help_Program_Lead</recordType>
