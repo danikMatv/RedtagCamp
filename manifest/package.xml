@@ -46,6 +46,7 @@
 		<members>Notificate_User_about_Lead_new_Status</members>
 		<members>Outreaches_count</members>
 		<members>Update_Lead_Count</members>
+		<members>Update_related_Lead</members>
 		<name>FlowDefinition</name>
 	</types>
 	<types>

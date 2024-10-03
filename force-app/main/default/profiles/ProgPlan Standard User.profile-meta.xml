@@ -208,6 +208,10 @@
         <enabled>false</enabled>
         <flow>Update_Lead_Count</flow>
     </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_related_Lead</flow>
+    </flowAccesses>
     <layoutAssignments>
         <layout>Lead-Lead Help Program</layout>
         <recordType>Lead.Help_Program_Lead</recordType>
