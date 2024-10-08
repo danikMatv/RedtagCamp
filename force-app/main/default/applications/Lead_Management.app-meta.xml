@@ -86,6 +86,7 @@
         <type>Flexipage</type>
         <profile>ProgPlan Standard User</profile>
     </profileActionOverrides>
+
     <tabs>standard-home</tabs>
     <tabs>standard-Lead</tabs>
     <tabs>Outreach__c</tabs>
