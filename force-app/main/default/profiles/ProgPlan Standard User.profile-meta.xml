@@ -193,6 +193,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Outreach__c.Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Outreach__c.Outcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -202,11 +207,19 @@
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
+        <flow>Notificate_group_Members_New_Lead_Status</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
         <flow>Outreaches_count</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Update_Lead_Count</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_related_Lead</flow>
     </flowAccesses>
     <layoutAssignments>
         <layout>Lead-Lead Help Program</layout>
