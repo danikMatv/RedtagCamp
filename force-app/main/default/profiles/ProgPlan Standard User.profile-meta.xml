@@ -193,12 +193,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Outreach__c.Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Outreach__c.Outcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Notificate_User_about_Lead_new_Status</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Notificate_group_Members_New_Lead_Status</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>

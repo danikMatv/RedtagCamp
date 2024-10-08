@@ -105,56 +105,10 @@
                 <identifier>RecordHelp_Description_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Outreaches_count__c</fieldItem>
-                <identifier>RecordOutreaches_count__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Successful_Outreaches__c</fieldItem>
-                <identifier>RecordSuccessful_Outreaches__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Percentage_of_successful_Outreaches__c</fieldItem>
-                <identifier>RecordPercentage_of_successful_Outreaches__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-09252a48-7e34-4eaf-ac03-f44413cca8ad</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Does_Skills_Meets_Program__c</fieldItem>
-                <identifier>RecordDoes_Skills_Meets_Program_cField</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Skills_Description__c}</leftValue>
-                        <operator>NE</operator>
-                    </criteria>
-                </visibilityRule>
-            </fieldInstance>
-        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
