@@ -4,16 +4,87 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>Convert</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Edit</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Lead.New_Outreach</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Delete</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ChangeOwnerOne</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ChangeRecordType</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Clone</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Share</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>RecordShareHierarchy</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>FindDup</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>XClean</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CreateCallList</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>PrintableView</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CreateSurveyInvitation</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>StartOutboundConversation</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>BookTestDrive</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AddToActionableList</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CreateSalesSummaries</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AssignRecordLabel</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CallHighlightAction</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>SmsHighlightAction</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>EmailHighlightAction</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>collapsed</name>
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsConfiguration</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsInNative</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>hideChatterActions</name>
@@ -103,36 +174,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Skills_Description__c</fieldItem>
                 <identifier>RecordSkills_Description_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Outreaches_count__c</fieldItem>
-                <identifier>RecordOutreaches_count__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Successful_Outreaches__c</fieldItem>
-                <identifier>RecordSuccessful_Outreaches__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Percentage_of_successful_Outreaches__c</fieldItem>
-                <identifier>RecordPercentage_of_successful_Outreaches__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-09252a48-7e34-4eaf-ac03-f44413cca8ad</name>

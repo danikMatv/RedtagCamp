@@ -24,32 +24,43 @@
         </rules>
         <rules>
             <name>From_successful_to_common</name>
-            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>formulaPriorValue</leftValueReference>
+                <leftValueReference>$Record__Prior.Outcome__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Outcome__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Declined</stringValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Outcome__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Not Responded</stringValue>
+                    <stringValue>Accepted</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>reduce_count</targetReference>
             </connector>
             <label>From successful to common</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Outcome_field_is_Accepted</name>
+        <label>Outcome field is Accepted?</label>
+        <locationX>1502</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Reduce_count_Outreach_field</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_it_is</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Outcome__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Accepted</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Reduce_count_Outreach_and_succeed_fields</targetReference>
+            </connector>
+            <label>Yes</label>
         </rules>
     </decisions>
     <decisions>
@@ -80,7 +91,7 @@
     <decisions>
         <name>Record</name>
         <label>Record</label>
-        <locationX>776</locationX>
+        <locationX>1040</locationX>
         <locationY>323</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -118,7 +129,22 @@
             <connector>
                 <targetReference>outcome_Accepted</targetReference>
             </connector>
-            <label>Is Updated</label>
+            <label>Is Updated outreach</label>
+        </rules>
+        <rules>
+            <name>Is_Updated_Lead</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Lead__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>isChenged</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Outcome_field_is_Accepted</targetReference>
+            </connector>
+            <label>Is Updated Lead</label>
         </rules>
     </decisions>
     <environments>Default</environments>
@@ -198,6 +224,54 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
+        <name>Increase_count_Outreach_and_succeed_fields</name>
+        <label>Increase count Outreach and succeed fields</label>
+        <locationX>1370</locationX>
+        <locationY>647</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Outreaches_count__c</field>
+            <value>
+                <elementReference>Updatecount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Successful_Outreaches__c</field>
+            <value>
+                <elementReference>succeedformula</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Increase_count_Outreach_field</name>
+        <label>Increase count Outreach field</label>
+        <locationX>1634</locationX>
+        <locationY>647</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Outreaches_count__c</field>
+            <value>
+                <elementReference>Updatecount</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>reduce_count</name>
         <label>reduce count</label>
         <locationX>842</locationX>
@@ -209,6 +283,60 @@
             </value>
         </inputAssignments>
         <inputReference>$Record.Lead__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Reduce_count_Outreach_and_succeed_fields</name>
+        <label>Reduce count Outreach and succeed fields</label>
+        <locationX>1370</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Increase_count_Outreach_and_succeed_fields</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record__Prior.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Outreaches_count__c</field>
+            <value>
+                <elementReference>reduceCount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Successful_Outreaches__c</field>
+            <value>
+                <elementReference>reduceSuccessfull</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Reduce_count_Outreach_field</name>
+        <label>Reduce count Outreach field</label>
+        <locationX>1634</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Increase_count_Outreach_field</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record__Prior.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Outreaches_count__c</field>
+            <value>
+                <elementReference>reduceCount</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
     </recordUpdates>
     <recordUpdates>
         <name>Update_count_field</name>
@@ -256,7 +384,7 @@
         <inputReference>$Record.Lead__r</inputReference>
     </recordUpdates>
     <start>
-        <locationX>650</locationX>
+        <locationX>914</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Record</targetReference>
@@ -265,5 +393,5 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
 </Flow>

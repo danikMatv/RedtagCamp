@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>*</members>
+		<name>ApprovalProcess</name>
+	</types>
+	<types>
 		<members>Lead.Help</members>
 		<members>Lead.Skill</members>
 		<name>BusinessProcess</name>
 	</types>
 	<types>
 		<members>Lead_Management</members>
+		<members>Program_Management</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
+		<members>Contact.Does_Skills_Meets_Program__c</members>
+		<members>Contact.Help_Description__c</members>
+		<members>Contact.Languages__c</members>
+		<members>Contact.Level__c</members>
+		<members>Contact.Skills_Description__c</members>
 		<members>Lead.CurrentGenerators__c</members>
 		<members>Lead.Does_Skills_Meets_Program__c</members>
 		<members>Lead.Help_Description__c</members>
@@ -26,28 +36,57 @@
 		<members>Outreach__c.Duration__c</members>
 		<members>Outreach__c.Lead__c</members>
 		<members>Outreach__c.Outcome__c</members>
+		<members>Program_Assignment__c.Contact__c</members>
+		<members>Program_Assignment__c.End_Date__c</members>
+		<members>Program_Assignment__c.Notes__c</members>
+		<members>Program_Assignment__c.Program__c</members>
+		<members>Program_Assignment__c.Start_Date__c</members>
+		<members>Program_Assignment__c.Status__c</members>
+		<members>Program__c.Budget__c</members>
+		<members>Program__c.End_Date__c</members>
+		<members>Program__c.Notes__c</members>
+		<members>Program__c.Start_Date__c</members>
+		<members>Program__c.Status__c</members>
+		<members>Program__c.Type__c</members>
 		<name>CustomField</name>
 	</types>
 	<types>
+		<members>Contact</members>
 		<members>Lead</members>
 		<members>Outreach__c</members>
+		<members>Program_Assignment__c</members>
+		<members>Program__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
+		<members>Outreach__c</members>
+		<members>Program_Assignment__c</members>
+		<members>Program__c</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>Contact_Default_Record_Page</members>
+		<members>Help_Program</members>
 		<members>Help_Program_Lead</members>
 		<members>Lead_Management_UtilityBar</members>
 		<members>Lead_Record_Page</members>
 		<members>Lead_Record_Page1</members>
 		<members>Outreach_Layout</members>
+		<members>Program_Home_Page</members>
+		<members>Program_Management_UtilityBar</members>
+		<members>Program_Record_Page</members>
+		<members>Skill_Program</members>
 		<members>Skill_Program_Lead</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>Create_Program_Assignment_for_Contact</members>
 		<members>Notificate_User_about_Lead_new_Status</members>
 		<members>Notificate_group_Members_New_Lead_Status</members>
 		<members>Outreaches_count</members>
 		<members>Update_Lead_Count</members>
 		<members>Update_related_Lead</members>
+		<members>creation_multiple_Programs</members>
 		<name>Flow</name>
 	</types>
 	<types>
@@ -63,6 +102,9 @@
 		<name>Group</name>
 	</types>
 	<types>
+		<members>Contact-Contact Layout</members>
+		<members>Contact-Help Layout</members>
+		<members>Contact-Skill Layout</members>
 		<members>Lead-Lead %28Marketing%29 Layout</members>
 		<members>Lead-Lead %28Sales%29 Layout</members>
 		<members>Lead-Lead %28Support%29 Layout</members>
@@ -70,11 +112,14 @@
 		<members>Lead-Lead Layout</members>
 		<members>Lead-Lead Skill Program</members>
 		<members>Outreach__c-Outreach Layout</members>
+		<members>Program_Assignment__c-Program Assignment Layout</members>
+		<members>Program__c-Program Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
 		<members>Lead_Management_Manager_Access</members>
 		<members>Lead_Management_Staff_Access</members>
+		<members>Program_Manager</members>
 		<name>PermissionSet</name>
 	</types>
 	<types>
@@ -84,6 +129,13 @@
 	<types>
 		<members>Lead.New_Outreach</members>
 		<name>QuickAction</name>
+	</types>
+	<types>
+		<members>Contact.Help_Program</members>
+		<members>Contact.Skill_Program</members>
+		<members>Lead.Help_Program_Lead</members>
+		<members>Lead.Skill_Program_Lead</members>
+		<name>RecordType</name>
 	</types>
 	<types>
 		<members>Lead</members>
