@@ -86,7 +86,6 @@
         <type>Flexipage</type>
         <profile>ProgPlan Standard User</profile>
     </profileActionOverrides>
-<<<<<<< HEAD
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Help_Program</content>
@@ -191,15 +190,11 @@
         <type>Flexipage</type>
         <profile>ProgPlan Standard User</profile>
     </profileActionOverrides>
-=======
-
->>>>>>> 8ded62d7c369592bbb8b8226764c355566e62d85
     <tabs>standard-home</tabs>
     <tabs>standard-Lead</tabs>
     <tabs>Outreach__c</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
-    <tabs>Program__c</tabs>
     <tabs>Program_Assignment__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Lead_Management_UtilityBar</utilityBar>

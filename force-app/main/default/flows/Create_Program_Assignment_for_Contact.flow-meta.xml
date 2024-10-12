@@ -153,7 +153,7 @@
         <label>Create Program Assignment</label>
         <locationX>264</locationX>
         <locationY>458</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
@@ -166,6 +166,21 @@
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Vlad_Ua_The_Best</name>
+            <fieldText>&lt;p&gt;Vlad Ua The Best&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Program_Assignment_Name</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Vlad</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>Start_Date</name>
@@ -182,6 +197,10 @@
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;End date cannot be in the past&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND({!End_Date} &gt; TODAY() , {!End_Date} &gt; {!Start_Date})</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Program_Assign_Status</name>
@@ -215,7 +234,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Fail</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);&quot;&gt;Program &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(255, 0, 0); font-size: 12px;&quot;&gt;Assignment&amp;nbsp;records were not added. &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px;&quot;&gt;Fail!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Program &lt;/span&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255); font-size: 12px;&quot;&gt;Assignment&amp;nbsp;records were not added. &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 12px;&quot;&gt;Fail!&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -226,7 +245,7 @@
         <label>Related Program for Contact</label>
         <locationX>176</locationX>
         <locationY>242</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
@@ -300,7 +319,7 @@
             <targetReference>Get_Related_Program</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>recordId</name>
         <dataType>SObject</dataType>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Add_Record_to_collection</name>
         <label>Add Record to collection</label>
-        <locationX>864</locationX>
-        <locationY>506</locationY>
+        <locationX>264</locationX>
+        <locationY>458</locationY>
         <assignmentItems>
             <assignToReference>varCollectionProgramRecords</assignToReference>
             <operator>Add</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Assign_Values_to_Record</name>
         <label>Assign Values to Record</label>
-        <locationX>864</locationX>
-        <locationY>398</locationY>
+        <locationX>264</locationX>
+        <locationY>350</locationY>
         <assignmentItems>
             <assignToReference>varProgramRecord.Budget__c</assignToReference>
             <operator>Assign</operator>
@@ -64,10 +64,57 @@
                 <elementReference>Loop_1.Program_Name</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProgramRecord.Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_1.Type_Program</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Add_Record_to_collection</targetReference>
         </connector>
     </assignments>
+    <choices>
+        <name>Canceled</name>
+        <choiceText>Canceled</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Canceled</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Finished</name>
+        <choiceText>Finished</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Finished</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Finished_new</name>
+        <choiceText>Finished</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Finished</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Pending</name>
+        <choiceText>Pending</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Pending</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Planned</name>
+        <choiceText>Planned</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Planned</stringValue>
+        </value>
+    </choices>
     <dynamicChoiceSets>
         <name>varPickListStatus</name>
         <dataType>Picklist</dataType>
@@ -76,14 +123,22 @@
         <picklistField>Status__c</picklistField>
         <picklistObject>Program__c</picklistObject>
     </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>varPicklistType</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Type__c</picklistField>
+        <picklistObject>Program__c</picklistObject>
+    </dynamicChoiceSets>
     <environments>Default</environments>
     <interviewLabel>creation multiple Programs {!$Flow.CurrentDateTime}</interviewLabel>
     <label>creation multiple Programs</label>
     <loops>
         <name>Loop_1</name>
         <label>Loop 1</label>
-        <locationX>776</locationX>
-        <locationY>290</locationY>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
         <collectionReference>Repeater_Creation_Profram_Records.AllItems</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -102,7 +157,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -115,18 +170,21 @@
     <recordCreates>
         <name>Create_Program_Records</name>
         <label>Create Program Records</label>
-        <locationX>776</locationX>
-        <locationY>698</locationY>
+        <locationX>176</locationX>
+        <locationY>650</locationY>
         <connector>
             <targetReference>Succeed_Adding</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Fail_Adding</targetReference>
+        </faultConnector>
         <inputReference>varCollectionProgramRecords</inputReference>
     </recordCreates>
     <screens>
         <name>Create_Programs</name>
         <label>Create Programs</label>
-        <locationX>776</locationX>
-        <locationY>182</locationY>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -165,12 +223,22 @@
                 </validationRule>
             </fields>
             <fields>
-                <name>Status</name>
-                <choiceReferences>varPickListStatus</choiceReferences>
+                <name>Type_Program</name>
+                <choiceReferences>varPicklistType</choiceReferences>
                 <dataType>String</dataType>
-                <defaultValue>
-                    <stringValue>Planned</stringValue>
-                </defaultValue>
+                <fieldText>Type</fieldText>
+                <fieldType>DropdownBox</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+            </fields>
+            <fields>
+                <name>Status</name>
+                <choiceReferences>Planned</choiceReferences>
+                <choiceReferences>Finished</choiceReferences>
+                <choiceReferences>Canceled</choiceReferences>
+                <choiceReferences>Pending</choiceReferences>
+                <dataType>String</dataType>
+                <defaultSelectedChoiceReference>Planned</defaultSelectedChoiceReference>
                 <fieldText>Status</fieldText>
                 <fieldType>DropdownBox</fieldType>
                 <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -201,8 +269,8 @@
     <screens>
         <name>Fail_Adding</name>
         <label>Fail Adding</label>
-        <locationX>1039</locationX>
-        <locationY>806</locationY>
+        <locationX>440</locationX>
+        <locationY>758</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -217,8 +285,8 @@
     <screens>
         <name>Succeed_Adding</name>
         <label>Succeed Adding</label>
-        <locationX>776</locationX>
-        <locationY>806</locationY>
+        <locationX>176</locationX>
+        <locationY>758</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -231,8 +299,8 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>650</locationX>
-        <locationY>48</locationY>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Programs</targetReference>
         </connector>
