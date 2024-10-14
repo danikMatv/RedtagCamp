@@ -65,6 +65,10 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>PublicYep/VilseXJxzIvroWepSbcYbmyqoiYFst1</members>
+		<name>Dashboard</name>
+	</types>
+	<types>
 		<members>Contact_Default_Record_Page</members>
 		<members>Help_Program</members>
 		<members>Help_Program_Lead</members>
@@ -136,6 +140,20 @@
 		<members>Lead.Help_Program_Lead</members>
 		<members>Lead.Skill_Program_Lead</members>
 		<name>RecordType</name>
+	</types>
+	<types>
+		<members>LeadManagement/Count_of_Outreaches_per_Lead_CIf1</members>
+		<members>LeadManagement/Lead_without_Outreachs_N8P</members>
+		<members>LeadManagement/Outreaches_by_Outcome_Xzk</members>
+		<members>ProgramManager/Matrix_Program_report_wIn</members>
+		<name>Report</name>
+	</types>
+	<types>
+		<members>Accounts_With_Opportunity</members>
+		<members>Lead_without_Outreachs</members>
+		<members>Outreaches</members>
+		<members>Programs_with_Program_Assignment</members>
+		<name>ReportType</name>
 	</types>
 	<types>
 		<members>Lead</members>
