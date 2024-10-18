@@ -383,6 +383,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Program_Assignment__c.Autoname__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Program_Assignment__c.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>

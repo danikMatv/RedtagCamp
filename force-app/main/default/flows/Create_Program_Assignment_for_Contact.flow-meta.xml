@@ -138,7 +138,7 @@
             <field>Type__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>recordId.RecordType.DeveloperName</elementReference>
+                <elementReference>recordId.RecordType.Name</elementReference>
             </value>
         </filters>
         <object>Program__c</object>
