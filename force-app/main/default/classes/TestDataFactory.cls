@@ -2,8 +2,8 @@
 public class TestDataFactory {
 
 
-    public static Program__c createProgram(){
-        Program__c program = new Program__c(Name = 'Test',Type__c = 'Help Program');
+    public static Program__c createProgram(String Name,String Type){
+        Program__c program = new Program__c(Name = Name,Type__c = Type);
         insert program;
         return program;
     }
@@ -28,6 +28,12 @@ public class TestDataFactory {
         return programAssignments;
     }
 
+    public static Contact createContactByFirstAndLastName(String firstName, String LastName){
+        Contact contact = new Contact(FirstName = firstName,LastName = LastName);
+        insert contact;
+        return contact;
+    }
+
     public static Program_Assignment__c createProgramAssing(Program__c program) {
         Contact contact = new Contact(LastName = 'Test Contact');
         insert contact;
@@ -50,8 +56,18 @@ public class TestDataFactory {
             Contact__c = contact.Id,
             Start_Date__c = Date.newInstance(2024, 12, 20)
         );
-        
+
         return newProgramAssign;
     }
     
+    public static Program_Assignment__c createProgramAssignmentWithEnteredContactAndProgramAndInsert(Program__c program,Contact contact){
+        Program_Assignment__c newProgramAssign = new Program_Assignment__c(
+            Name = '', 
+            Program__c = program.Id, 
+            Contact__c = contact.Id,
+            Start_Date__c = Date.newInstance(2024, 12, 20)
+        );
+        insert newProgramAssign;
+        return newProgramAssign;
+    }
 }

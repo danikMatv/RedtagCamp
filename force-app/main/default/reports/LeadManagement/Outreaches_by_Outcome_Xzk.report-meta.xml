@@ -34,7 +34,7 @@
         <chartType>HorizontalBar</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Outreach__c.Outcome__c</groupingColumn>
+        <groupingColumn>BucketField_13684941</groupingColumn>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -59,13 +59,10 @@
     <columns>
         <field>Outreach__c.Notes__c</field>
     </columns>
-    <columns>
-        <field>BucketField_13684941</field>
-    </columns>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Outreach__c.Outcome__c</field>
+        <field>BucketField_13684941</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Outreaches by Outcome</name>

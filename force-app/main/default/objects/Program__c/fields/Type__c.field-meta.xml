@@ -11,12 +11,12 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Skill_Program</fullName>
+                <fullName>Skill Program</fullName>
                 <default>false</default>
                 <label>Skill Program</label>
             </value>
             <value>
-                <fullName>Help_Program</fullName>
+                <fullName>Help Program</fullName>
                 <default>false</default>
                 <label>Help Program</label>
             </value>

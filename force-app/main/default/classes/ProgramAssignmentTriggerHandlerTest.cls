@@ -1,11 +1,17 @@
 @isTest
 public with sharing class ProgramAssignmentTriggerHandlerTest {
     
+    @TestSetup
+    static void makeData(){
+        Program__c program = TestDataFactory.createProgram('Test','Help Program');
+        Contact contact = TestDataFactory.createContactByFirstAndLastName('Test','Test Contact');
+    }
+
+
     @isTest
     private static void beforeInsertTest(){
-        Program__c program = TestDataFactory.createProgram();
-        Contact contact = new Contact(LastName = 'Test' , FirstName = 'Test Contact');
-        insert contact;
+        Program__c program = [SELECT Name,Type__c FROM Program__c WHERE Name = 'Test' AND Type__c = 'Help Program' LIMIT 1];
+        Contact contact = [SELECT FirstName,LastName FROM Contact WHERE FirstName = 'Test' AND LastName = 'Test Contact' LIMIT 1];
         Program_Assignment__c programAssignment = TestDataFactory.createProgramAssignmentWithEnteredContactAndProgram(program,contact);
 
         Test.startTest();
@@ -20,19 +26,16 @@ public with sharing class ProgramAssignmentTriggerHandlerTest {
             WHERE Id =:programAssignment.Id
             LIMIT 1
             ];
-        Assert.areEqual('Test Contact - Test : 20.12.2024', programAssignmentAfterInsert.Name,'name was not generated');
+        Assert.areEqual('Test - Test : 20.12.2024', programAssignmentAfterInsert.Name,'name was not generated');
     }
 
     @isTest
     private static void beforeUpdateTest(){
-        Program__c program = TestDataFactory.createProgram();
-        
-        Contact contact = new Contact(LastName = 'Test' , FirstName = 'Test Contact');
-        insert contact;
-        
+        Program__c program = [SELECT Name,Type__c FROM Program__c WHERE Name = 'Test' AND Type__c = 'Help Program' LIMIT 1];
+        Contact contact = [SELECT FirstName,LastName FROM Contact WHERE FirstName = 'Test' AND LastName = 'Test Contact' LIMIT 1];
         Program_Assignment__c programAssignment = TestDataFactory.createProgramAssignmentWithEnteredContactAndProgram(program,contact);
         insert programAssignment;
-        
+
         Contact contactNew = new Contact(LastName = 'QA' , FirstName = 'QA');
         insert contactNew;
         

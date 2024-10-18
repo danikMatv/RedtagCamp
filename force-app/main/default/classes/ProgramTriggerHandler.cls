@@ -18,7 +18,7 @@ public with sharing class ProgramTriggerHandler extends TriggerHandler{
         List<Program_Assignment__c> programAssignments = SOQLQueryHelper.programAssignmentsWithAutonameTrue(programsIds);
 
         for(Program_Assignment__c pA : programAssignments){
-            pA.Name = 'Changed';
+            pA.Name = 'Changed'; // This will call beforeUpdate trigger in ProgramAssignmentTriggerHandler and change related ProgramAssigns.  
         }
 
         update programAssignments;

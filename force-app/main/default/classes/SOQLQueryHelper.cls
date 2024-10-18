@@ -1,4 +1,4 @@
-public with sharing class SOQLQueryHelper {
+public inherited sharing class SOQLQueryHelper {
 
     public static List<Contact> getContactsByIdsSet(Set<Id> contactIds){
         return [SELECT Id,FirstName FROM Contact WHERE Id IN :contactIds];
@@ -15,7 +15,7 @@ public with sharing class SOQLQueryHelper {
         ];
     }
 
-    public static List<Program_Assignment__c> programAssignmentsWithStatusDeniedOrApplied(){
+    public static List<Program_Assignment__c> programAssignmentsWithAnyStatusExceptDeniedOrApplied(){
         return [
             SELECT Id, Program__c 
             FROM Program_Assignment__c 

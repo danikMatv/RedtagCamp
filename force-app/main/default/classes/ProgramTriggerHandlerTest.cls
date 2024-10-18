@@ -1,10 +1,15 @@
 @isTest
 public class ProgramTriggerHandlerTest {
     
+    @TestSetup
+    static void makeData(){
+        Program__c program = TestDataFactory.createProgram('Test','Help Program');
+        Contact contact = TestDataFactory.createContactByFirstAndLastName('Test','Test Contact');
+    }
 
     @isTest
     static void TestProgramTriggerAfterUpdate(){
-        Program__c program = TestDataFactory.createProgram();
+        Program__c program = [SELECT Name,Type__c FROM Program__c WHERE Name = 'Test' AND Type__c = 'Help Program' LIMIT 1];
         List<Program_Assignment__c> programAssignments = TestDataFactory.createProgramAssignment(program,2);
 
         Test.startTest();
@@ -21,14 +26,14 @@ public class ProgramTriggerHandlerTest {
             WHERE Program__c =:updatedProgram1.Id
         ];
         for (Program_Assignment__c pA : updatedAssignments) {
-            System.assertEquals('Help Contact new Test 1 : null', pA.Name, 'Program Assignment name was not updated correctly.');
+            System.assertEquals('Mykhailo Mudryk', pA.Name, 'Program Assignment name was not updated correctly.');
         }
     }
 
 
     @isTest
     static void TestBeforeDeleteDelRelatedProgramAssignments() {
-        Program__c program = TestDataFactory.createProgram();
+        Program__c program = [SELECT Name,Type__c FROM Program__c WHERE Name = 'Test' AND Type__c = 'Help Program' LIMIT 1];
         List<Program_Assignment__c> programAssignments = TestDataFactory.createProgramAssignment(program, 2);
 
         Test.startTest();
@@ -47,7 +52,7 @@ public class ProgramTriggerHandlerTest {
 
     @isTest
     static void TestBeforeDeleteExeptionIfChildNotAvailableForDelete() {
-        Program__c program = TestDataFactory.createProgram();
+        Program__c program = [SELECT Name,Type__c FROM Program__c WHERE Name = 'Test' AND Type__c = 'Help Program' LIMIT 1];
         Program_Assignment__c programAssignment = TestDataFactory.createProgramAssing(program);
 
         Test.startTest();

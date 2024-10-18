@@ -8,10 +8,10 @@ public with sharing class ProgramTriggerHelper {
         }
         delete programAssignments;
     }
-
+    
     public static void deleteExeptionIfChildNotAvailableForDelete(Map<Id, Program__c> deletedRecordsMap) {
         Set<Id> programIds = new Set<Id>();
-        List<Program_Assignment__c> programAssignments = SOQLQueryHelper.programAssignmentsWithStatusDeniedOrApplied();
+        List<Program_Assignment__c> programAssignments = SOQLQueryHelper.programAssignmentsWithAnyStatusExceptDeniedOrApplied();
 
         for(Program_Assignment__c pA : programAssignments){
             programIds.add(pA.Program__c);

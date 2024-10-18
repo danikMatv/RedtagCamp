@@ -4,7 +4,6 @@ public with sharing class ProgramAssignmentTriggerHandler extends TriggerHandler
         List<Program_Assignment__c> programAssignmentList = Trigger.New;
         Set<Id> contactIds = new Set<Id>();
         Set<Id> protgramsIds = new Set<Id>();
-        Set<Program_Assignment__c> programAssignmentSet = new Set<Program_Assignment__c>();
 
         for (Program_Assignment__c pA : programAssignmentList) {
             if(pA.Autoname__c){
@@ -17,32 +16,52 @@ public with sharing class ProgramAssignmentTriggerHandler extends TriggerHandler
         Map<Id,Program__c> programs = new Map<Id,Program__c> (SOQLQueryHelper.getProgramsByIdSet(protgramsIds));
 
         for(Program_Assignment__c pA : programAssignmentList){
-            programAssignmentSet.add(ProgramAssignmentHalper.generateNameAndAddToObject(
-                pA,contacts.get(pA.Contact__c),programs.get(pA.Program__c)));
+            ProgramAssignmentHalper.generateNameAndAddToObject(
+                pA,contacts.get(pA.Contact__c),programs.get(pA.Program__c));
         }
     }
 
     public override void beforeUpdate() { 
         List<Program_Assignment__c> programAssignmentList = Trigger.New;
+        Map<Id,Program_Assignment__c> programAssignmentOldMap = (Map<Id,Program_Assignment__c>) Trigger.oldMap;
         Set<Id> contactIds = new Set<Id>();
         Set<Id> protgramsIds = new Set<Id>();
-        Set<Program_Assignment__c> programAssignmentSet = new Set<Program_Assignment__c>();
-
-        Integer key = 0;
+        
+        Boolean autoNameIsElected = false;
         for (Program_Assignment__c pA : programAssignmentList) {
-            if(pA.Autoname__c){
-                key = 1;
-                contactIds.add(pA.Contact__c);
-                protgramsIds.add(pA.Program__c);
+                if(pA.Autoname__c && pA.Autoname__c != programAssignmentOldMap.get(pA.Id).Autoname__c){
+                        autoNameIsElected = true;
+                        contactIds.add(pA.Contact__c);
+                    }
+                if(pA.Autoname__c && pA.Contact__c != programAssignmentOldMap.get(pA.Id).Contact__c){
+                    autoNameIsElected = true;
+                    contactIds.add(pA.Contact__c);
+                    protgramsIds.add(pA.Program__c);
+                }
+                if(pA.Autoname__c && pA.Program__c != programAssignmentOldMap.get(pA.Id).Program__c){
+                    autoNameIsElected = true;
+                    contactIds.add(pA.Contact__c);
+                    protgramsIds.add(pA.Program__c);
+                }
+                if(pA.Autoname__c && pA.Start_Date__c != programAssignmentOldMap.get(pA.Id).Start_Date__c){
+                    autoNameIsElected = true;
+                    contactIds.add(pA.Contact__c);
+                    protgramsIds.add(pA.Program__c);
+                }
+                if(pA.Autoname__c && pA.Name != programAssignmentOldMap.get(pA.Id).Name){
+                    autoNameIsElected = true;
+                    contactIds.add(pA.Contact__c);
+                    protgramsIds.add(pA.Program__c);
+                }
             }
-        }
-        if(key == 1){
+            
+        if(autoNameIsElected){
             Map<Id,Contact> contacts = new Map<Id,Contact>(SOQLQueryHelper.getContactsByIdsSet(contactIds));
             Map<Id,Program__c> programs = new Map<Id,Program__c> (SOQLQueryHelper.getProgramsByIdSet(protgramsIds));
 
             for(Program_Assignment__c pA : programAssignmentList){
-                programAssignmentSet.add(ProgramAssignmentHalper.generateNameAndAddToObject(
-                pA,contacts.get(pA.Contact__c),programs.get(pA.Program__c)));
+                ProgramAssignmentHalper.generateNameAndAddToObject(
+                pA,contacts.get(pA.Contact__c),programs.get(pA.Program__c));
             }
         }
     }
