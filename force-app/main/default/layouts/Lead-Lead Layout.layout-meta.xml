@@ -52,6 +52,10 @@
                 <behavior>Readonly</behavior>
                 <field>Percentage_of_successful_Outreaches__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Need_Attention__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

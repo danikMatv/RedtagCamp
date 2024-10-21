@@ -29,4 +29,12 @@ public inherited sharing class SOQLQueryHelper {
             WHERE Program__c IN :programsIds 
         ];
     }
+
+    public static List<Lead> getAllLeadsAndFewParamFromOutreach(){
+        List<Lead> leadsList = new List<Lead> ([
+            SELECT Id,Name,Outreaches_count__c,Successful_Outreaches__c,(SELECT Name,Outcome__c FROM Outreachs__r) 
+            FROM Lead
+            ]);
+            return leadsList;
+    }
 }

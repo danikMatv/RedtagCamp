@@ -257,6 +257,16 @@
                 <identifier>RecordGenderIdentityField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Need_Attention__c</fieldItem>
+                <identifier>RecordNeed_Attention_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-4eef5730-2c33-4dde-90b7-ebcd1d27aab2</name>
         <type>Facet</type>
     </flexiPageRegions>
