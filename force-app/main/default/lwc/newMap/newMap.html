@@ -1,0 +1,49 @@
+<template>
+    <!-- api prop. Dynam -->
+    <lightning-card title="Locations Map">
+        <lightning-map
+        map-markers={mapMarkers}
+        markers-title="Lunch Gems"
+        onmarkerselect={handleMarkerSelect}
+        selected-marker-value={setSelectedMarkerValue}
+    >
+    </lightning-map>
+        <div class="slds-p-bottom_large slds-p-left_large ">
+            <form>
+                <div class="slds-p-around_medium lgc-bg">
+                    <lightning-input type="text" label="Country" data-id="Country"></lightning-input>
+                    <lightning-input type="text" label="City" data-id="City"></lightning-input>
+                    <lightning-input type="text" label="Address" data-id="Address"></lightning-input>
+                    <lightning-input type="text" label="Postal Code" data-id="PostalCode"></lightning-input>
+                    <lightning-input type="text" label="Title" data-id="Title"></lightning-input>
+                </div>
+            </form>
+            <lightning-button variant="brand" label="Add" title="Primary action" 
+            onclick={handleClick} class="slds-float_right slds-p-right_large "></lightning-button>
+        </div>
+    </lightning-card>
+
+    <template if:true={ShowDetail}>
+        <div class="slds-backdrop slds-backdrop_open"></div> 
+        <div class="slds-modal slds-fade-in-open" aria-hidden="false" role="dialog">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">Weather Detail</h2>
+                </header>
+                <div class="slds-modal__body">
+                    <p class="slds-modal__title slds-hyphenate">Temperature: {selectedMarkerWeather}°C</p>
+                    <lightning-icon icon-name={selectedMarkerIcon} alternative-text="Weather Icon" size="large"></lightning-icon>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={handleClose}></lightning-button>
+                </footer>
+            </div>
+        </div>
+    </template>
+    
+    
+</template>

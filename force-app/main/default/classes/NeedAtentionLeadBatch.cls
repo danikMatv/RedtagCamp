@@ -1,12 +1,17 @@
-public with sharing class NeedAtentionLeadBatch implements Schedulable {
+public with sharing class NeedAtentionLeadBatch implements Database.Batchable<Lead> {
     
-    public void execute(SchedulableContext ctx) {
-        List<Lead> leads = [
-            SELECT Id, Name, Need_Attention__c,Owner.Email, (SELECT Name, Outcome__c FROM Outreachs__r) 
-            FROM Lead
-            WHERE Need_Attention__c = false
-        ];
+    private static String query = 'SELECT Id, Name, Need_Attention__c, Owner.Email, (SELECT Name, Outcome__c FROM Outreachs__r) FROM Lead WHERE Need_Attention__c = false';
 
+    public Iterable<Lead> start(Database.BatchableContext bc) {
+        return [
+            SELECT Id, Name, Need_Attention__c, Owner.Email,
+                 (SELECT Name, Outcome__c FROM Outreachs__r) 
+            FROM Lead
+             WHERE Need_Attention__c = false
+        ];
+    }
+
+    public void execute(Database.BatchableContext bc, List<Lead> leads) {
         List<Outreachs_outcome__mdt> outreachsOutcome = [SELECT Label FROM Outreachs_outcome__mdt];
         Set<String> successfulOutcomes = new Set<String>();
 
@@ -35,18 +40,10 @@ public with sharing class NeedAtentionLeadBatch implements Schedulable {
         if (!leadsToUpdate.isEmpty()) {
             update leadsToUpdate;
         }
-        NotificateUserAboutNewLeadStatus(leadsToUpdate);
     }
 
-    private void NotificateUserAboutNewLeadStatus(List<Lead> leadsList){
-        System.debug('In the email sender');
-        for(Lead lead : leadsList){
-            Messaging.SingleEmailMessage emailToSend = new Messaging.SingleEmailMessage();
-            emailToSend.setToAddresses(new String[] { lead.Owner.Email });
-            emailToSend.setSubject('Lead Status Updated');
-            emailToSend.setPlainTextBody('Dear ' + lead.Owner.Name + ',  lead status - updated ');            
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailToSend });
-        }
-    
+    public void finish(Database.BatchableContext bc) {
+        LeadTriggerHelper.NotificateUserAboutNewLeadStatus();
+        System.debug('Batch process finished.');
     }
 }

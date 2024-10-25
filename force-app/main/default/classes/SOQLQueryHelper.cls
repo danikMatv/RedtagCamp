@@ -30,11 +30,13 @@ public inherited sharing class SOQLQueryHelper {
         ];
     }
 
-    public static List<Lead> getAllLeadsAndFewParamFromOutreach(){
-        List<Lead> leadsList = new List<Lead> ([
-            SELECT Id,Name,Outreaches_count__c,Successful_Outreaches__c,(SELECT Name,Outcome__c FROM Outreachs__r) 
+    public static List<Lead> getLeadsWithOutreachesById(Set<Id> leadIds){
+        return [
+            SELECT Id,Name,Outreaches_count__c,Successful_Outreaches__c,
+            (SELECT Name,Outcome__c FROM Outreachs__r) 
             FROM Lead
-            ]);
-            return leadsList;
+            WHERE Id IN :leadIds
+            ];
+            //having
     }
 }
