@@ -34,9 +34,12 @@
                     </button>
                     <h2 class="slds-modal__title slds-hyphenate">Weather Detail</h2>
                 </header>
-                <div class="slds-modal__body">
-                    <p class="slds-modal__title slds-hyphenate">Temperature: {selectedMarkerWeather}°C</p>
-                    <lightning-icon icon-name={selectedMarkerIcon} alternative-text="Weather Icon" size="large"></lightning-icon>
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center">
+                    <p><strong>Temperature:</strong> {selectedMarkerWeather.temperature}°C</p>
+                    <p><strong>Wind Speed:</strong> {selectedMarkerWeather.windSpeed} m/s</p>
+                    <p><strong>Description:</strong> {selectedMarkerWeather.description}</p>
+                    <p><strong>Feels Like:</strong> {selectedMarkerWeather.feelsLike}°C</p>
+                    <img src={selectedMarkerWeather.icon} alt="Weather Icon">
                 </div>
                 <footer class="slds-modal__footer">
                     <lightning-button label="Close" onclick={handleClose}></lightning-button>
@@ -44,6 +47,7 @@
             </div>
         </div>
     </template>
+    
     
     
 </template>

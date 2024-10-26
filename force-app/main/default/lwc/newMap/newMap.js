@@ -4,23 +4,14 @@ export default class NewMap extends LightningElement {
     ShowDetail = false;
     latitude;
     longitude;
-    temp;
     selectedMarkerValue;
-    markerIndex;
+    markerIndex = 0;
     
     @track
-    mapMarkers = [
-        {
-            location: {
-                Latitude: '35.7796',
-                Longitude: '10.7073'
-            },
-            title: 'Roma',
-            description: 'Via Roma, 1, 00184 Roma, Italy',
-            icon: 'utility:frozen',
-            value: 'marker0'
-        }
-    ]
+    selectedMarkerWeather = [];
+
+    @track
+    mapMarkers = [];
 
     async getCoord(city, country) {
         try {
@@ -41,16 +32,21 @@ export default class NewMap extends LightningElement {
         }
     }
     async getWeather(lat,lng) {
-        try{
+        try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=b426444f10e7e2e2b5b064b59c46c60d&units=metric`);
             const data = await response.json();
-            console.log('Response data:', data);
-            if(data.main){
-                this.temp = data.main.temp;
-                return this.temp;
+            console.log(data);
+            if (data.main && data.weather && data.wind) {
+                this.selectedMarkerWeather = {
+                    temperature: data.main.temp,
+                    feelsLike: data.main.feels_like,
+                    windSpeed: data.wind.speed,
+                    icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+                    description: data.weather[0].description
+                };
+                return this.selectedMarkerWeather;
             }
-        }
-        catch(error){
+        } catch (error) {
             console.error('Error fetching weather:', error);
         }
     }
@@ -67,7 +63,7 @@ export default class NewMap extends LightningElement {
         }
     }
 
-    handleMarkerSelect(event) {
+    async handleMarkerSelect(event) {
         this.ShowDetail = true;
         this.selectedMarkerValue = event.detail.selectedMarkerValue;
         console.log('Selected Marker Value:', event.detail);
@@ -77,7 +73,7 @@ export default class NewMap extends LightningElement {
             console.log('Selected Marker:', selectedMarker);
             const lat = selectedMarker.location.Latitude;
             const lng = selectedMarker.location.Longitude;
-            this.getWeather(lat, lng);
+            this.selectedMarkerWeather = await this.getWeather(lat, lng);
         } else {
             console.error('Selected marker not found in mapMarkers array');
         }
@@ -88,17 +84,12 @@ export default class NewMap extends LightningElement {
     }
 
     handleClick() {
-        // Increment the marker index
         this.markerIndex++;
-    
-        // Collect input values
         const country = this.template.querySelector('lightning-input[data-id="Country"]').value;
         const city = this.template.querySelector('lightning-input[data-id="City"]').value;
         const address = this.template.querySelector('lightning-input[data-id="Address"]').value;
         const postalCode = this.template.querySelector('lightning-input[data-id="PostalCode"]').value;
         const title = this.template.querySelector('lightning-input[data-id="Title"]').value;
-    
-        // Fetch coordinates and add the new marker
         this.getCoord(city, country).then(coords => {
             if (coords) {
                 const newMarker = {
@@ -108,11 +99,8 @@ export default class NewMap extends LightningElement {
                     },
                     title: title || 'New Location',
                     description: `${address}, ${city}, ${postalCode}, ${country}`,
-                    icon: 'utility:location',
-                    value: `marker${this.markerIndex}` // Assign a unique value
+                    value: `marker${this.markerIndex}`
                 };
-    
-                // Add the new marker to the mapMarkers array
                 this.mapMarkers = [...this.mapMarkers, newMarker];
             }
         });
