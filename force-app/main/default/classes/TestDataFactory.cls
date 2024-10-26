@@ -49,6 +49,34 @@ public class TestDataFactory {
         return newProgramAssign;
     }
 
+    public static Lead generateLead(){
+        Lead lead = new Lead(
+            LastName = 'Test Lead',
+            Company = 'Test Company',
+            Need_Attention__c = false,
+            OwnerId = UserInfo.getUserId()
+        );
+        return lead;
+    }
+
+    public static Outreach__c generateOutreach(Lead lead){
+        Outreach__c outreach = new Outreach__c(
+            Lead__c = lead.Id,
+            Outcome__c = 'Declined',
+            Communication_Method__c = 'Phone'
+        );
+        return outreach;
+    }
+
+    public static List<Outreach__c> generateOutreaches(Lead lead,Integer quantity){
+        List<Outreach__c> outreaches = new List<Outreach__c>();
+        for(Integer i=0; i<quantity; i++){
+            outreaches.add(generateOutreach(lead));
+        }
+        return outreaches;
+    }
+
+
     public static Program_Assignment__c createProgramAssignmentWithEnteredContactAndProgram(Program__c program,Contact contact){
         Program_Assignment__c newProgramAssign = new Program_Assignment__c(
             Name = '', 

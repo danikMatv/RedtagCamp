@@ -105,6 +105,12 @@
                 <identifier>RecordHelp_Description_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Need_Attention__c</fieldItem>
+                <identifier>RecordNeed_Attention__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-09252a48-7e34-4eaf-ac03-f44413cca8ad</name>
         <type>Facet</type>
     </flexiPageRegions>

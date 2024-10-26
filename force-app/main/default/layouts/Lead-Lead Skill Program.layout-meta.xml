@@ -29,6 +29,10 @@
                 <behavior>Edit</behavior>
                 <field>Skills_Description__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Need_Attention__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
