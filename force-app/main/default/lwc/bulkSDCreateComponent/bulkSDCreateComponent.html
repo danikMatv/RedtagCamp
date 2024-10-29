@@ -1,0 +1,123 @@
+<template>
+    <lightning-card title="Progress Tracker" class="slds-p-around_medium">
+        <div class="slds-m-around_small slds-p-left_large">
+            <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                <lightning-progress-step
+                    label="Choose Contact"
+                    value="step1"
+                    description="Please select a contact"
+                ></lightning-progress-step>
+                <lightning-progress-step
+                    label="Choose Program Assignment"
+                    value="step2"
+                    description="Please select a contact"
+                ></lightning-progress-step>
+                <lightning-progress-step
+                    label="Create Service Delivery Record(s)"
+                    description="Please fill in all the details"
+                    step-error-message="Please fill in all the details"
+                    value="step3"
+                ></lightning-progress-step>
+                <lightning-progress-step
+                    label="Created successfully"
+                    step-icon-name="utility:check"
+                    value="step4"
+                    class="slds-text-color_success"
+                ></lightning-progress-step>
+            </lightning-progress-indicator>
+        </div>
+        <div slot="footer" class = "slds-p-around_x-large">
+            <template if:true={currentStepIsOne}>
+                <p>
+                    <lightning-record-picker
+                        label="Contacts"
+                        placeholder="Search Contact..."
+                        object-api-name="Contact"
+                        class="slds-m-top_x-small slds-m-bottom_medium slds-size_1-of-1"
+                        value={contactId}
+                        onchange={handleChooseContact}
+                    ></lightning-record-picker>
+               </p>
+            </template>
+
+            <template if:true={currentStepIsTwo}>
+                <p>
+                    <lightning-combobox
+                        name="programAssignment"
+                        label="Program Assignment"
+                        placeholder="Choose Program Assignment"
+                        value={progAssignId}
+                        onchange={handleSChooseProgramAssignment}
+                        options={statusOptions}
+                    >
+                    </lightning-combobox>
+                </p>
+            </template>
+
+            <template if:true={currentStepIsThree}>
+                <template for:each={itemList} for:item="record">
+                    <div key={record.id} class="slds-grid slds-gutters">
+                        <lightning-input name="Service_Name__c" class="slds-p-horizontal_small" label="Service Name" data-id={record.id} value={record.Service_Name__c}
+                            onchange={handleInputChange} required></lightning-input>
+                        <lightning-input name="Duration__c" class="slds-p-horizontal_small" type="number" label="Duration" data-id={record.id} value={record.Duration__c}
+                            onchange={handleInputChange} required></lightning-input>
+                        <lightning-input name="Service_Date__c" class="slds-p-horizontal_small" type="date" label="Service Date" data-id={record.id} checked={record.Service_Date__c}
+                            onchange={handleInputChange}></lightning-input>
+                        <lightning-input name="Billable__c" class="slds-p-horizontal_small" type="checkbox" label="Billable" data-id={record.id} checked={record.Billable__c}
+                            onchange={handleInputChange}></lightning-input>
+                        <lightning-button-icon icon-name="utility:close" alternative-text="Remove" onclick={removeRow}
+                            data-id={record.id}></lightning-button-icon>
+                    </div>
+                </template>
+                <template if:false={isSave}>
+                    <p class="slds-p-top_small">
+                        <lightning-button label="Add New" onclick={addRow}></lightning-button>
+                        <lightning-button label="Save" onclick={handleSubmit}></lightning-button>
+                    </p>
+                </template>
+            </template>
+
+            <template if:true={currentStepIsFour}>
+                <lightning-card title="Success!" class="slds-p-around_medium slds-text-align_center">
+                    <div class="slds-m-around_small">
+                        <lightning-icon icon-name="utility:check" alternative-text="Success" size="large" class="slds-m-bottom_medium"></lightning-icon>
+                        <h2 class="slds-text-heading_medium slds-m-bottom_small">Records Created Successfully</h2>
+                        <p class="slds-text-body_regular">
+                            Your service delivery records have been created successfully.
+                        </p>
+                        <template if:true={itemList.length}>
+                            <lightning-datatable 
+                                key-field="id"
+                                data={itemList} 
+                                columns={columns}
+                                hide-checkbox-column
+                                class="slds-m-top_small"
+                            >
+                            </lightning-datatable>
+                            <p class="slds-text-body_regular slds-m-top_medium">
+                                You created {itemList.length} records.
+                            </p>
+                        </template>
+                    </div>
+                </lightning-card>
+            </template>
+
+            <template if:false={currentStepIsFour}>
+                <lightning-button class="slds-float_right slds-m-top_x-small"
+                    variant="brand" 
+                    label="Next" 
+                    title="Primary action" 
+                    onclick={handleClick} 
+                ></lightning-button>
+            </template>
+            <template if:true={currentStepIsFour}>
+                <lightning-button class="slds-float_right slds-m-top_x-small"
+                    variant="brand" 
+                    label="Add new Record" 
+                    title="Primary action" 
+                    onclick={refreshHandle} 
+                ></lightning-button>
+            </template>
+        </div>
+    </lightning-card>
+</template>
