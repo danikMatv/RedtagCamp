@@ -13,17 +13,7 @@ export default class BulkSDCreateComponent extends LightningElement {
     contactId;
     progAssignId;
 
-    @track itemList = [
-        {
-            id: 0,
-            Contact__c: this.contactId,
-            Program_Assignment__c: this.progAssignId,
-            Service_Name__c: '',
-            Service_Date__c: '',
-            Duration__c: 0,
-            Billable__c: false
-        }
-    ];
+    @track itemList = [];
 
     @track numRecordsToCreate = 1;
     @track statusOptions = [];
@@ -140,33 +130,14 @@ export default class BulkSDCreateComponent extends LightningElement {
     }
 
     async handleSubmit() {
-         const recordsToInsert = this.itemList.map(record => ({
-            Contact__c: record.Contact__c,
-            Program_Assignment__c: record.Program_Assignment__c,
-            Service_Name__c: record.Service_Name__c,
-            Service_Date__c: record.Service_Date__c,
-            Duration__c: record.Duration__c,
-            Billable__c: record.Billable__c
-        },
-        console.log('handleSubmit',record)
-        
-    ));
-    console.log('Records to insert:', JSON.stringify(recordsToInsert));
-
-    
-        try {
-            await insertServiceDelivery({ serviceDeliveryList: recordsToInsert });
-            this.showToast('Success', 'Ready to add new records.', 'success');
-            console.log('Records inserted successfully');
-            this.itemList = [];
-            this.isSave = true;
-            this.currentStep = 'step4';
-            this.currentStepIsThree = false;
-            this.currentStepIsFour = true;
-    
-        } catch (error) {
-            console.error('Error inserting records', error);
-        }
+        this.isSave = true;
+        console.log('Items to Save:', JSON.stringify(this.itemList));
+        console.log('this.contactId',this.contactId);
+        console.log('this.progAssignId',this.progAssignId);
+        this.showToast('Success', 'Success', 'success');
+        const itemListToSave = this.itemList.map(({ id, ...record }) => record);
+        await insertServiceDelivery({serviceDeliveryList: itemListToSave});
+        this.showToast('Success', 'Records created successfully.', 'success');
     }
 
 }

@@ -143,6 +143,11 @@
             <field>Autoname__c</field>
             <table>Program__c.Program_Assignments__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hour_Rate__c</field>
+            <table>Program__c.Program_Assignments__r</table>
+        </columns>
         <masterLabel>Program Assignments</masterLabel>
     </sections>
 </ReportType>

@@ -72,12 +72,14 @@
                 <template if:false={isSave}>
                     <p class="slds-p-top_small">
                         <lightning-button label="Add New" onclick={addRow}></lightning-button>
-                        <lightning-button label="Save" onclick={handleSubmit}></lightning-button>
+                        <template if:true={itemList.length}>
+                            <lightning-button label="Save" onclick={handleSubmit}></lightning-button>
+                        </template>
                     </p>
                 </template>
             </template>
 
-            <template if:true={currentStepIsFour}>
+            <template if:true={currentStepIsFour}>  
                 <lightning-card title="Success!" class="slds-p-around_medium slds-text-align_center">
                     <div class="slds-m-around_small">
                         <lightning-icon icon-name="utility:check" alternative-text="Success" size="large" class="slds-m-bottom_medium"></lightning-icon>
