@@ -65,8 +65,10 @@
                             onchange={handleInputChange}></lightning-input>
                         <lightning-input name="Billable__c" class="slds-p-horizontal_small" type="checkbox" label="Billable" data-id={record.id} checked={record.Billable__c}
                             onchange={handleInputChange}></lightning-input>
-                        <lightning-button-icon icon-name="utility:close" alternative-text="Remove" onclick={removeRow}
+                        <template if:false={isSave}>    
+                            <lightning-button-icon icon-name="utility:close" alternative-text="Remove" onclick={removeRow}
                             data-id={record.id}></lightning-button-icon>
+                        </template>
                     </div>
                 </template>
                 <template if:false={isSave}>
@@ -80,7 +82,7 @@
             </template>
 
             <template if:true={currentStepIsFour}>  
-                <lightning-card title="Success!" class="slds-p-around_medium slds-text-align_center">
+                <lightning-card class="slds-p-around_medium slds-text-align_center">
                     <div class="slds-m-around_small">
                         <lightning-icon icon-name="utility:check" alternative-text="Success" size="large" class="slds-m-bottom_medium"></lightning-icon>
                         <h2 class="slds-text-heading_medium slds-m-bottom_small">Records Created Successfully</h2>
