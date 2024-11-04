@@ -48,4 +48,8 @@
         </div>
     </template>
 
+    <template lwc:if={successful}>
+        <lightning-toast title="Success" message="PDF generated successfully!" variant="success"></lightning-toast>
+    </template>
+
 </template>

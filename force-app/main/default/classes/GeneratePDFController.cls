@@ -27,7 +27,7 @@ public with sharing class GeneratePDFController {
         
         if (!includeNonBillableSD) {
             serviceDeliveryList = [
-            SELECT Id, Name, Billable__c, Contact__r.Name, Duration__c, Service_Date__c,Delivery_Price__c, Service_Name__c
+            SELECT Id, Name, Billable__c, Contact__r.Name, Duration__c, Service_Date__c, Service_Name__c
             FROM Service_Delivery__c 
             WHERE Program_Assignment__c = :recordId
             AND Service_Date__c > :startDateForLoop
@@ -36,7 +36,7 @@ public with sharing class GeneratePDFController {
         }
         else{
         serviceDeliveryList = [
-                SELECT Id, Name, Billable__c, Contact__r.Name, Duration__c, Service_Date__c,Delivery_Price__c, Service_Name__c
+                SELECT Id, Name, Billable__c, Contact__r.Name, Duration__c, Service_Date__c, Service_Name__c
                 FROM Service_Delivery__c 
                 WHERE Program_Assignment__c = :recordId
                 AND Service_Date__c > :startDateForLoop

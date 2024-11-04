@@ -33,4 +33,43 @@ public with sharing class ProgramAssignmentController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled
+    public static String savePdf(String url, String recordId,String endDate,String startDate) {
+        PageReference pdfPage = new PageReference(url);
+        Blob pdf = pdfPage.getContentAsPDF();
+        
+        try {
+            ContentVersion contentVersion = new ContentVersion();
+            contentVersion.Title = 'Service Delivery Report ' + 'period : ' + startDate + ' - '  + endDate;
+            contentVersion.PathOnClient = 'ServiceDeliveryReport.pdf';
+            contentVersion.VersionData = pdf;
+            contentVersion.FirstPublishLocationId = recordId;
+            insert contentVersion;
+            return 'PDF created';
+        } catch (Exception e) {
+            throw new AuraHandledException('PDF generation failed: ' + e.getMessage());
+        }
+    }
+
+
+    @AuraEnabled
+    public static List<ContentDocument> getRelatedPDF(String recordId) {
+        List<ContentDocumentLink> documentLinks = [
+            SELECT ContentDocumentId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId = :recordId
+        ];
+        Set<Id> documentIds = new Set<Id>();
+        for (ContentDocumentLink link : documentLinks) {
+            documentIds.add(link.ContentDocumentId);
+        }
+        List<ContentDocument> pdfDocuments = [
+            SELECT Id, Title, LatestPublishedVersionId
+            FROM ContentDocument
+            WHERE Id IN :documentIds
+        ];
+        return pdfDocuments;
+    }
+
 }
