@@ -1,0 +1,14 @@
+<template>
+    <button class="slds-button slds-button_brand" onclick={handleClick}>
+        Show PDF
+    </button>
+    <template if:true={showPDF}>
+        <ul class="slds-list_dotted">
+            <template for:each={attList} for:item="att">
+                <li key={att.id} class="slds-item slds-has-dividers_around-space">
+                    <a href={att.url} target="_blank">{att.name}</a>
+                </li>
+            </template>
+        </ul>
+    </template>
+</template>

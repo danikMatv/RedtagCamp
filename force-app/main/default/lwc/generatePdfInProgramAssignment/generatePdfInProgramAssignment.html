@@ -1,0 +1,55 @@
+<template>
+    
+    <lightning-quick-action-panel header="Generate Service Delivery Report">
+
+        <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+            <lightning-progress-step label="Enter Information" value="1" >
+            </lightning-progress-step>
+            <lightning-progress-step label="Generate PDF" value="2" >
+            </lightning-progress-step>
+        </lightning-progress-indicator>
+
+    </lightning-quick-action-panel>
+
+    <template if:true={currentStepIsOne}>
+        <div class="slds-m-around_small slds-p-left_large">
+            <lightning-input type="date" label="Start Date" name="startDate" onchange={handleInputChange}></lightning-input>
+            <lightning-input type="date" label="End Date" name="endDate" onchange={handleInputChange}></lightning-input>
+            <lightning-input type="checkbox" label="Include Non-billable SD" name="includeNonBillableSD" onchange={handleInputChange}>
+                
+            </lightning-input>
+        </div>
+        <div slot="footer" class="slds-p-top_small ">
+            <p class="slds-float_right slds-p-around_small">
+                <lightning-button label="Next" 
+                variant="brand" 
+                onclick={handleClick}> 
+                </lightning-button>
+            </p>        
+        </div>
+    </template>
+
+    <template if:true={currentStepIsTwo}>
+        <div slot="footer" class="slds-p-top_small ">
+            <p class="slds-align_absolute-center slds-p-around_small">
+                <lightning-button label="Close" 
+                variant="neutral" 
+                onclick={handleClose}> 
+                </lightning-button>
+                <lightning-button label="Pre-view"                 
+                variant="brand" 
+                onclick={handleGeneratePreview}> 
+                </lightning-button>
+                <lightning-button label="Generate PDF"                 
+                variant="brand" 
+                onclick={handleGeneratePDF}> 
+                </lightning-button>
+            </p>
+        </div>
+    </template>
+
+    <template lwc:if={successful}>
+        <lightning-toast title="Success" message="PDF generated successfully!" variant="success"></lightning-toast>
+    </template>
+
+</template>
