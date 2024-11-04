@@ -40,6 +40,10 @@
                 <behavior>Edit</behavior>
                 <field>Hour_Rate__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Overall_price__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

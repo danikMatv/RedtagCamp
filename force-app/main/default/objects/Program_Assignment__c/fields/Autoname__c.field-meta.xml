@@ -3,6 +3,7 @@
     <fullName>Autoname__c</fullName>
     <defaultValue>true</defaultValue>
     <description>Apex trigger will generate name for Program Assignment record if this checkbox is true</description>
+    <externalId>false</externalId>
     <label>Autoname</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
