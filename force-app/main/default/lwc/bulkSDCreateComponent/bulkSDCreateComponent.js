@@ -1,6 +1,7 @@
 import { LightningElement, track, wire,api } from 'lwc';
 import getAllProgramAssignmentsRelatedToContact from '@salesforce/apex/ProgramManagementClass.getAllProgramAssignmentsRelatedToContact';
 import insertServiceDelivery from '@salesforce/apex/ProgramManagementClass.insertServiceDelivery'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class BulkSDCreateComponent extends LightningElement {
     currentStepIsOne = true;
@@ -12,10 +13,9 @@ export default class BulkSDCreateComponent extends LightningElement {
     currentStep = 'step1';
     contactId;
     progAssignId;
-
+    numRecordsToCreate = 1;
+    
     @track itemList = [];
-
-    @track numRecordsToCreate = 1;
     @track statusOptions = [];
 
     @wire(getAllProgramAssignmentsRelatedToContact,{contactId: '$contactId'})
@@ -84,7 +84,6 @@ export default class BulkSDCreateComponent extends LightningElement {
         this.currentStepIsOne = true; 
         this.contactId = null;
         this.progAssignId = null;
-        this.showToast('Success', 'Ready to add new records.', 'success');
     }
    showToast(title, message, variant) {
         const evt = new ShowToastEvent({
@@ -131,13 +130,18 @@ export default class BulkSDCreateComponent extends LightningElement {
 
     async handleSubmit() {
         this.isSave = true;
-        console.log('Items to Save:', JSON.stringify(this.itemList));
-        console.log('this.contactId',this.contactId);
-        console.log('this.progAssignId',this.progAssignId);
-        this.showToast('Success', 'Success', 'success');
+        this.dispatchEvent(
+            new ShowToastEvent({
+            title:'Success',
+            message:'Service Delivery updated',
+            variant:'success'})
+        );
         const itemListToSave = this.itemList.map(({ id, ...record }) => record);
         await insertServiceDelivery({serviceDeliveryList: itemListToSave});
-        this.showToast('Success', 'Records created successfully.', 'success');
+        this.itemList = [];
+        this.currentStep = 'step4';
+        this.currentStepIsFour = true;
+        this.currentStepIsOne = false;
     }
 
 }

@@ -1,0 +1,40 @@
+<apex:page controller="GeneratePDFController" renderAs="pdf">
+    <h1>Service Delivery Report</h1>
+
+    <apex:form>
+        <apex:pageBlock>
+            <apex:pageBlockSection title="Report Details" columns="1">
+                <apex:outputLabel value="Start Date:" for="startDate" />
+                <apex:outputText value="{!startDate}" id="startDate" />
+
+                <apex:outputLabel value="End Date:" for="endDate" />
+                <apex:outputText value="{!endDate}" id="endDate" />
+
+                <apex:outputText value="Overall Price: {!overPrice}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th>Service Name</th>
+                    <th>Service Date</th>
+                    <th>Duration (mins)</th>
+                    <th>Price</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!serviceDeliveryWrapperList}" var="serviceDelivery">
+                    <tr>
+                        <td>{!serviceDelivery.serviceDelivery.Service_Name__c}</td>
+                        <td>{!serviceDelivery.serviceDelivery.Service_Date__c}</td>
+                        <td>{!serviceDelivery.serviceDelivery.Duration__c}</td>
+                        <td>{!serviceDelivery.price}</td>
+                        <td>{!serviceDelivery.serviceDelivery.Contact__r.Name}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </apex:form>
+</apex:page>
