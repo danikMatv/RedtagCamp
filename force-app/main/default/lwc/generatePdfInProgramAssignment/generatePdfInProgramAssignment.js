@@ -1,6 +1,7 @@
 import { LightningElement,track,wire,api } from 'lwc';
 import { CloseActionScreenEvent } from 'lightning/actions';
 import savePdf from '@salesforce/apex/ProgramAssignmentController.savePdf';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class GeneratePdfInProgramAssignment extends LightningElement {
     startDate = 0;
@@ -35,7 +36,12 @@ export default class GeneratePdfInProgramAssignment extends LightningElement {
     }
 
     handleInputChange(event){
-        this.reportParams[event?.currentTarget?.name] = event?.currentTarget?.value;
+        if(event?.currentTarget?.name == 'includeNonBillableSD'){
+            this.reportParams[0].includeNonBillableSD = event?.currentTarget?.checked;
+        }
+        else{
+            this.reportParams[0][event?.currentTarget?.name] = event?.currentTarget?.value;            
+        }
     }
 
     handleClose(){
@@ -45,18 +51,25 @@ export default class GeneratePdfInProgramAssignment extends LightningElement {
     async handleGeneratePreview(){
         console.log(this.recordId);
         
-        this.url = `/apex/generatePDF?recordId=${this.recordId}&endDate=${this.reportParams.endDate}&startDate=${this.reportParams.startDate}&includeNonBillableSD=${this.reportParams.includeNonBillableSD}`;
+        this.url = `/apex/generatePDF?recordId=${this.recordId}&endDate=${this.reportParams[0].endDate}&startDate=${this.reportParams[0].startDate}&includeNonBillableSD=${this.reportParams[0].includeNonBillableSD}`;
         content:window.open(this.url, '_blank')
         
     }
 
     async handleGeneratePDF(event){
-        this.url = `/apex/generatePDF?recordId=${this.recordId}&endDate=${this.reportParams.endDate}&startDate=${this.reportParams.startDate}&includeNonBillableSD=${this.reportParams.includeNonBillableSD}`;
+        this.url = `/apex/generatePDF?recordId=${this.recordId}&endDate=${this.reportParams[0].endDate}&startDate=${this.reportParams[0].startDate}&includeNonBillableSD=${this.reportParams[0].includeNonBillableSD}`;
         console.log(this.url);
         try {
-            const result = await savePdf({url: this.url, recordId: this.recordId ,endDate : this.reportParams.endDate, startDate: this.reportParams.startDate});
+            const result = await savePdf({url: this.url, recordId: this.recordId ,endDate : this.reportParams[0].endDate, startDate: this.reportParams[0].startDate});
             console.log(result);
-            this.successful = true;
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message: 'PDF Generated Successfully',
+                    variant: 'success',
+                }),
+            )
+            this.dispatchEvent(new CloseActionScreenEvent());
         } catch (error) {
             console.error('Error generating PDF: ', error);
         }

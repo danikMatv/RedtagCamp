@@ -32,6 +32,7 @@ public with sharing class GeneratePDFController {
             WHERE Program_Assignment__c = :recordId
             AND Service_Date__c > :startDateForLoop
             AND Service_Date__c < :endDateForLoop
+            AND Billable__c = true
             ];    
         }
         else{
@@ -48,6 +49,7 @@ public with sharing class GeneratePDFController {
         Decimal overallDuration = 0;
         for (Service_Delivery__c sd : serviceDeliveryList) {
             if (sd.Duration__c != null) {
+                System.debug('Sd name: '+ sd.Name );
                 overallDuration += sd.Duration__c;
             }
         }
@@ -58,19 +60,18 @@ public with sharing class GeneratePDFController {
         Decimal price = 0;
         if (overallDuration > 0 && overPrice != null) {
             for (Service_Delivery__c sd : serviceDeliveryList) {
-                if(sd.Billable__c){
-                    price = (sd.Duration__c * pricePerMin);
-                    System.debug('price: ' + price);
-                    serviceDeliveryWrapperList.add(new ServiceDeliveryWrapper(sd,price.intValue()));
-                }
+                price = (sd.Duration__c * pricePerMin);
+                System.debug('price: '+ sd.Name + '-' + price);
+                serviceDeliveryWrapperList.add(new ServiceDeliveryWrapper(sd,price.intValue()));
             }
         }
         System.debug('pricePerMIn: ' + pricePerMin);
         System.debug('Service Delivery List Size: ' + serviceDeliveryList.size());
         System.debug('serviceDeliveryWrapperList List Size: ' + serviceDeliveryWrapperList.size());
-    
     }
+
     private Decimal calculatePricePerMin(Decimal duration, Decimal overPrice) {
         return overPrice / (duration);
     }
+    
 }
