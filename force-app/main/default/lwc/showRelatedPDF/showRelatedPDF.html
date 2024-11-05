@@ -3,7 +3,7 @@
         Show PDF
     </button>
     <template if:true={showPDF}>
-        <ul class="slds-list_dotted">
+        <ul class="slds-list_dotted slds-p-around_small">
             <template for:each={attList} for:item="att">
                 <li key={att.id} class="slds-item slds-has-dividers_around-space">
                     <a href={att.url} target="_blank">{att.name}</a>

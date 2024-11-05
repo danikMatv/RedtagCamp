@@ -2,6 +2,7 @@ import { LightningElement, track, wire,api } from 'lwc';
 import getAllProgramAssignmentsRelatedToContact from '@salesforce/apex/ProgramManagementClass.getAllProgramAssignmentsRelatedToContact';
 import insertServiceDelivery from '@salesforce/apex/ProgramManagementClass.insertServiceDelivery'
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { RefreshEvent } from "lightning/refresh";
 
 export default class BulkSDCreateComponent extends LightningElement {
     currentStepIsOne = true;
@@ -68,22 +69,12 @@ export default class BulkSDCreateComponent extends LightningElement {
     }
 
     refreshHandle() {
-        this.itemList = [
-            {
-                id: 0,
-                Contact__c: this.contactId,
-                Program_Assignment__c: this.progAssignId,
-                Service_Name__c: '',
-                Service_Date__c: '',
-                Duration__c: 0,
-                Billable__c: false
-            }
-        ];
         this.currentStep = 'step1';
         this.currentStepIsFour = false;
         this.currentStepIsOne = true; 
         this.contactId = null;
         this.progAssignId = null;
+        this.dispatchEvent(new RefreshEvent())
     }
    showToast(title, message, variant) {
         const evt = new ShowToastEvent({
@@ -129,7 +120,18 @@ export default class BulkSDCreateComponent extends LightningElement {
     }
 
     async handleSubmit() {
-        this.isSave = true;
+        for (const record of this.itemList){
+            if(!record.Service_Name__c || !record.Service_Date__c || !record.Duration__c){
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                    title:'Error',
+                    message:'Please fill all required fields',
+                    variant:'error'})
+                );
+                return;
+            }
+        }
+            this.isSave = true;
         this.dispatchEvent(
             new ShowToastEvent({
             title:'Success',
@@ -141,7 +143,8 @@ export default class BulkSDCreateComponent extends LightningElement {
         this.itemList = [];
         this.currentStep = 'step4';
         this.currentStepIsFour = true;
-        this.currentStepIsOne = false;
+        this.currentStepIsOne = false;    
+    
     }
 
 }
